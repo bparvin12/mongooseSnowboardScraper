@@ -13,7 +13,7 @@ module.exports = function (router) {
     router.get("/", function (req, res) {
         res.render("home");
     });
-    //route renders the saved handlebars page
+    //route renders the  handlebars page
     router.get("/saved", function (req, res) {
         res.render("saved");
     });
@@ -53,7 +53,7 @@ module.exports = function (router) {
         });
     });
 
-    router.patch("/api/snowboards", function (req, res) {
+    router.put("/api/snowboards/:snowboard_id", function (req, res) {
         snowboardsController.update(req.body, function (err, data) {
             res.json(data);
         });
@@ -80,8 +80,8 @@ module.exports = function (router) {
         });
     });
 
-    //route to post new notes to articles
-    router.post("/api/notes", function (req, res) {
+    //route to post new notes to snowboards
+    router.post("/api/notes/", function (req, res) {
         notesController.save(req.body, function (data) {
             res.json(data);
         });

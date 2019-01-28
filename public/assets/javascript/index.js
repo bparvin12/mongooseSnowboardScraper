@@ -4,14 +4,20 @@ $(document).ready(function() {
     // all the dynamic content will go. Adding event listeners to any dynamically 
     // generated "save snowboard" and "scrape new snowbaords" buttons
     var snowboardContainer = $(".snowboard-container");
-    $(document).on("click", "btn.save", handleSnowboardSave);
+    $(document).on("click", ".btn.save", handleSnowboardSave);
     $(document).on("click", ".scrape-new", handleSnowboardScrape);
 
     initPage();
 
     function initPage() {
         snowboardContainer.empty();
-        $.get("/api/snowboards?saved=false")
+        $.ajax({
+            method:"GET",
+            url: "/api/snowboards/",
+            data: {
+                saved: false
+            }
+        })
             .then(function(data) {
                 if (data && data.length) {
                     renderSnowboards(data);
@@ -28,7 +34,7 @@ $(document).ready(function() {
         var snowboardPanels = [];
         //we pass each snowboard JSON object to the createPanel function which returns a bootstrap
         //panel with our snowboard data inside
-        for (var i=0;i<snowboards.length;i++) {
+        for (var i=0; i<snowboards.length; i++) {
             snowboardPanels.push(createPanel(snowboards[i]));
         }
         //append to snowboardPanels container
@@ -82,8 +88,8 @@ $(document).ready(function() {
 
         //patch method
         $.ajax({
-            method: "PATCH",
-            url: "/api/snowboards",
+            method: "PUT",
+            url: "/api/snowboards/" + snowboardToSave._id,
             data: snowboardToSave
         })
         .then(function(data) {

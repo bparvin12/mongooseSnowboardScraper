@@ -2,13 +2,13 @@
 //=====================
 
 //require request and cheerio, makes scrapes possible
-var axios = require("axios");
+var request = require("request");
 var cheerio = require("cheerio");
 
 var scrape = function (cb) {
-    axios.get("https://www.evo.com/shop/snowboard/snowboards/").then(function (response) {
+    request("https://www.evo.com/shop/snowboard/snowboards/", function(err, res, body) {
         // Load the html body from axios into cheerio
-        var $ = cheerio.load(response.data);
+        var $ = cheerio.load(body);
         var snowboards = [];
         // For each element with a "title" class
         $(".product-thumb").each(function (i, element) {
@@ -34,6 +34,6 @@ var scrape = function (cb) {
         // // Send a "Scrape Complete" message to the browser
         // res.send("Scrape Complete");
     });
-}
+};
 
 module.exports = scrape;

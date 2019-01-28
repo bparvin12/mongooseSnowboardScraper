@@ -15,6 +15,10 @@ var snowboardSchema = new Schema({
     image: {
         type: String,
         required: true
+    },
+    saved: {
+        type: Boolean,
+        default: false
     }
 });
 

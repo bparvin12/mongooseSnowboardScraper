@@ -2,16 +2,22 @@ $(document).ready(function () {
 
     var snowboardContainer = $(".snowboard-container");
 
-    $(document).on("click", "btn.delete", handleSnowboardDelete);
-    $(document).on("click", "btn.notes", handleSnowboardNotes);
-    $(document).on("click", "btn.save", handleNoteSave);
-    $(document).on("click", "btn.note-delete", handleNoteDelete);
+    $(document).on("click", ".btn.delete", handleSnowboardDelete);
+    $(document).on("click", ".btn.notes", handleSnowboardNotes);
+    $(document).on("click", ".btn.save", handleNoteSave);
+    $(document).on("click", ".btn.note-delete", handleNoteDelete);
 
     initPage();
 
     function initPage() {
         snowboardContainer.empty();
-        $.get("/api/snowboards?saved=true")
+        $.ajax({
+            method: "GET",
+            url: "/api/snowboards/",
+            data: {
+                saved: true
+            }
+        })
             .then(function (data) {
                 if (data && data.length) {
                     renderSnowboards(data);
@@ -47,8 +53,11 @@ $(document).ready(function () {
                 snowboard.price,
                 "</div>",
                 "<img class='rounded mx-auto d-block' src='" + snowboard.image + "'>",
-                "<a class='btn btn-success save'>",
-                "Save Snowboard",
+                "<a class='btn btn-success notes'>",
+                "Snowboard Notes",
+                "</a>",
+                "<a class='btn btn-success delete'>",
+                "Unsave Snowboard",
                 "</a>",
                 "</div>"
             ].join(""));
@@ -97,12 +106,12 @@ $(document).ready(function () {
                 "<hr />",
                 "<ul class='list-group note-container'>",
                 "</ul>",
-                "<textarea placeholder='New Note' rows='4' cols='60'></textarea>",
-                "<button class-'btn btn-success save'>Save Note</button>",
+                "<textarea class='noteText' placeholder='New Note' rows='4' cols='60'></textarea>",
+                "<button class='btn btn-success save'>Save Note</button>",
                 "</div>"
             ].join("");
 
-            bootboc.dialog({
+            bootbox.dialog({
                 message: modalText,
                 closeButton: true
             });
@@ -147,14 +156,14 @@ $(document).ready(function () {
 
     function handleNoteSave () {
         var noteData;
-        var newNote = $(".bootbox-body textarea").val().trim();
+        var newNote = $(".noteText").val().trim();
 
         if (newNote) {
             noteData = {
                 _id: $(this).data("snowboard")._id,
                 noteText: newNote
             };
-            $.post("/api/notes", noteData).then(function(){
+            $.post("/api/notes/", noteData).then(function(){
                 bootbox.hideAll();
             });
         }
