@@ -1,0 +1,37 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Snowboard Scraper</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            {{!-- link for saved articles --}}
+            <li><a href="/saved">Saved Snowboards</a></li>
+            {{!-- link for new articles --}}
+            <li><a class="btn btn-danger scrape-new">SCRAPE NEW SNOWBOARDS</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <div class="overlay"></div>
+    <div class="background-image"></div>
+    <div class="caption">
+        <h1>Mongo Scraper</h1>
+        <p>Snowboard Edition</p>
+    </div>
+</div>
+<div class="container-fluid snowboard-container"></div>
+
+<footer class="footer">
+    <div class="container">
+        <p>Snowboard Mongo Scraper</p>
+    </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="./assets/javascript/index.js"></script>
