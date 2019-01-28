@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
 
-//if deployed use the deployed database. otherwise use the local mongoheadlines database
-var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadLines";
+//if deployed use the deployed database. otherwise use the local mongoSnowboards database
+var db = process.env.MONGODB_URI || "mongodb://localhost/mongoSnowboards";
 
 //connect mongoose to our databse
 mongoose.connect(db, {useNewUrlParser: true}, function (error) {
